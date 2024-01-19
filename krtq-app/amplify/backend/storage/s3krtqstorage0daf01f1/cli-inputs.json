@@ -1,0 +1,13 @@
+{
+  "resourceName": "s3krtqstorage0daf01f1",
+  "bucketName": "krtq-storage-0daf01f1",
+  "policyUUID": "67bf3b1c",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
+import { Authenticator } from '@aws-amplify/ui-react';
 import awsmobile from './aws-exports.js';
 import Header from './components/Header/Header.jsx';
 
@@ -16,6 +17,14 @@ function App() {
     <>
       <div>
         <Header />
+        <Authenticator>
+          {({ signOut, user }) => (
+            <main>
+              <h1>Hello {user.username}</h1>
+              <button onClick={signOut}>Sign out</button>
+            </main>
+          )}
+        </Authenticator>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

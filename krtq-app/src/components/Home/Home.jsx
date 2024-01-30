@@ -2,10 +2,8 @@ import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 import awsmobile from '../../aws-exports.js';
-
+// Dont know whether declaring auth here is better of if better to declare in main.jsx
 Amplify.configure(awsmobile);
-
-
 
 
 const Home = () =>  {

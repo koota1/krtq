@@ -1,9 +1,10 @@
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
-import awsmobile from '../../aws-exports.js';
+import awsconfig from '../../aws-exports.js';
+import { PostCreateForm } from '../../ui-components/PostCreateForm'
 // Dont know whether declaring auth here is better of if better to declare in main.jsx
-Amplify.configure(awsmobile);
+Amplify.configure(awsconfig);
 
 
 const Home = () =>  {
@@ -14,6 +15,7 @@ const Home = () =>  {
           <main>
             <h1>Hello!</h1>
             <h3>This is the homepage - content goes here</h3>
+            <PostCreateForm/>
             <button onClick={signOut}>Sign out</button>
           </main>
         )}

@@ -6,6 +6,7 @@ import NotFound from "./components/Pages/NotFound.jsx";
 import Navbar from "./components/Navbar.jsx";
 
 // Need to route for all types of auth (google, facebook, apple)
+// Currently anything besides email takes you to landing
 function App() {
   return (
     <div>

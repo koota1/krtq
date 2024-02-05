@@ -1,26 +1,23 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import './App.css';
-import Home from './components/Home/Home.jsx';
-import Landing from './components/Landing/Landing.jsx';
-
-
+import {Route, Routes} from "react-router-dom";
+import Landing from "./components/Pages/Landing.jsx";
+import Authentication from "./components/Authentication.jsx";
+import HomeContent from "./components/Pages/HomeContent.jsx";
+import NotFound from "./components/Pages/NotFound.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
-    <div className='App'>
-      <Router>
-        <div className='nav-bar'>
-          <NavLink className='nav-bar_link' exact activeClassName="active" to="/">Landing</NavLink>
-          <NavLink className='nav-bar_link' activeClassName="active" to="/home">Home</NavLink>
-        </div>
+    <div>
+        <Navbar/>
         <Routes>
-          <Route path='/' element={<Landing/>}></Route>
-          <Route path='/home' element={<Home/>}></Route>
+            <Route index element={<Landing/>}/>
+            <Route path="/auth" element={<Authentication/>}/>
+            <Route path="/home" element={<HomeContent/>}/>
+            <Route path="*" element={<NotFound/>}/>
         </Routes>
-      </Router>
     </div>
-  );
+  )
 }
+
 
 export default App;

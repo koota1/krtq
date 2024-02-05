@@ -6,9 +6,36 @@
 }
 
 .nav-bar {
-  margin: 1em;
+  padding: 20px;
+  display: inline-flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
 }
 
-.nav-bar_link {
-  margin: 1em;
+#name {
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: 16px;
+  margin-top: 10px; /*Position the header*/
+}
+
+.nav-bar .links {
+  margin-left: auto;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.nav-bar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+
+.nav-bar a:hover {
+  color: #ffffff;
 }

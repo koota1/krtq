@@ -18,7 +18,10 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [],
-        "socialProviders": [],
+        "socialProviders": [
+          "FACEBOOK",
+          "GOOGLE"
+        ],
         "usernameAttributes": [
           "EMAIL"
         ],

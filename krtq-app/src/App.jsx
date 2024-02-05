@@ -5,6 +5,7 @@ import HomeContent from "./components/Pages/HomeContent.jsx";
 import NotFound from "./components/Pages/NotFound.jsx";
 import Navbar from "./components/Navbar.jsx";
 
+// Need to route for all types of auth (google, facebook, apple)
 function App() {
   return (
     <div>

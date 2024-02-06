@@ -17,6 +17,9 @@
       },
       "storage": {
         "s3krtqstorage0daf01f1": {}
+      },
+      "api": {
+        "krtq": {}
       }
     }
   }

@@ -10,9 +10,10 @@ import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { Post } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { DataStore } from "aws-amplify/datastore";
-export default function PostCreateForm(props) {
+export default function PostUpdateForm(props) {
   const {
-    clearOnSuccess = true,
+    id: idProp,
+    post: postModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -27,9 +28,23 @@ export default function PostCreateForm(props) {
   const [title, setTitle] = React.useState(initialValues.title);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setTitle(initialValues.title);
+    const cleanValues = postRecord
+      ? { ...initialValues, ...postRecord }
+      : initialValues;
+    setTitle(cleanValues.title);
     setErrors({});
   };
+  const [postRecord, setPostRecord] = React.useState(postModelProp);
+  React.useEffect(() => {
+    const queryData = async () => {
+      const record = idProp
+        ? await DataStore.query(Post, idProp)
+        : postModelProp;
+      setPostRecord(record);
+    };
+    queryData();
+  }, [idProp, postModelProp]);
+  React.useEffect(resetStateValues, [postRecord]);
   const validations = {
     title: [{ type: "Required" }],
   };
@@ -89,12 +104,13 @@ export default function PostCreateForm(props) {
               modelFields[key] = null;
             }
           });
-          await DataStore.save(new Post(modelFields));
+          await DataStore.save(
+            Post.copyOf(postRecord, (updated) => {
+              Object.assign(updated, modelFields);
+            })
+          );
           if (onSuccess) {
             onSuccess(modelFields);
-          }
-          if (clearOnSuccess) {
-            resetStateValues();
           }
         } catch (err) {
           if (onError) {
@@ -102,7 +118,7 @@ export default function PostCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "PostCreateForm")}
+      {...getOverrideProps(overrides, "PostUpdateForm")}
       {...rest}
     >
       <TextField
@@ -134,13 +150,14 @@ export default function PostCreateForm(props) {
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Clear"
+          children="Reset"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          isDisabled={!(idProp || postModelProp)}
+          {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
           gap="15px"
@@ -150,7 +167,10 @@ export default function PostCreateForm(props) {
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={Object.values(errors).some((e) => e?.hasError)}
+            isDisabled={
+              !(idProp || postModelProp) ||
+              Object.values(errors).some((e) => e?.hasError)
+            }
             {...getOverrideProps(overrides, "SubmitButton")}
           ></Button>
         </Flex>

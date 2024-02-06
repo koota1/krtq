@@ -21,25 +21,25 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type PostCreateFormInputValues = {
-    title?: string;
+export declare type CommentCreateFormInputValues = {
+    content?: string;
 };
-export declare type PostCreateFormValidationValues = {
-    title?: ValidationFunction<string>;
+export declare type CommentCreateFormValidationValues = {
+    content?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type PostCreateFormOverridesProps = {
-    PostCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    title?: PrimitiveOverrideProps<TextFieldProps>;
+export declare type CommentCreateFormOverridesProps = {
+    CommentCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    content?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type PostCreateFormProps = React.PropsWithChildren<{
-    overrides?: PostCreateFormOverridesProps | undefined | null;
+export declare type CommentCreateFormProps = React.PropsWithChildren<{
+    overrides?: CommentCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: PostCreateFormInputValues) => PostCreateFormInputValues;
-    onSuccess?: (fields: PostCreateFormInputValues) => void;
-    onError?: (fields: PostCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: PostCreateFormInputValues) => PostCreateFormInputValues;
-    onValidate?: PostCreateFormValidationValues;
+    onSubmit?: (fields: CommentCreateFormInputValues) => CommentCreateFormInputValues;
+    onSuccess?: (fields: CommentCreateFormInputValues) => void;
+    onError?: (fields: CommentCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: CommentCreateFormInputValues) => CommentCreateFormInputValues;
+    onValidate?: CommentCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function PostCreateForm(props: PostCreateFormProps): React.ReactElement;
+export default function CommentCreateForm(props: CommentCreateFormProps): React.ReactElement;

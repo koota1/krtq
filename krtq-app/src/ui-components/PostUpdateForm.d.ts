@@ -6,6 +6,7 @@
 
 import * as React from "react";
 import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { Post } from "../models";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -21,25 +22,26 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type PostCreateFormInputValues = {
+export declare type PostUpdateFormInputValues = {
     title?: string;
 };
-export declare type PostCreateFormValidationValues = {
+export declare type PostUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type PostCreateFormOverridesProps = {
-    PostCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type PostUpdateFormOverridesProps = {
+    PostUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type PostCreateFormProps = React.PropsWithChildren<{
-    overrides?: PostCreateFormOverridesProps | undefined | null;
+export declare type PostUpdateFormProps = React.PropsWithChildren<{
+    overrides?: PostUpdateFormOverridesProps | undefined | null;
 } & {
-    clearOnSuccess?: boolean;
-    onSubmit?: (fields: PostCreateFormInputValues) => PostCreateFormInputValues;
-    onSuccess?: (fields: PostCreateFormInputValues) => void;
-    onError?: (fields: PostCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: PostCreateFormInputValues) => PostCreateFormInputValues;
-    onValidate?: PostCreateFormValidationValues;
+    id?: string;
+    post?: Post;
+    onSubmit?: (fields: PostUpdateFormInputValues) => PostUpdateFormInputValues;
+    onSuccess?: (fields: PostUpdateFormInputValues) => void;
+    onError?: (fields: PostUpdateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: PostUpdateFormInputValues) => PostUpdateFormInputValues;
+    onValidate?: PostUpdateFormValidationValues;
 } & React.CSSProperties>;
-export default function PostCreateForm(props: PostCreateFormProps): React.ReactElement;
+export default function PostUpdateForm(props: PostUpdateFormProps): React.ReactElement;

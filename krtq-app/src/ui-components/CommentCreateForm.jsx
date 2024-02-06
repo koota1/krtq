@@ -7,10 +7,10 @@
 /* eslint-disable */
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
-import { Post } from "../models";
+import { Comment } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { DataStore } from "aws-amplify/datastore";
-export default function PostCreateForm(props) {
+export default function CommentCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -22,16 +22,16 @@ export default function PostCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    title: "",
+    content: "",
   };
-  const [title, setTitle] = React.useState(initialValues.title);
+  const [content, setContent] = React.useState(initialValues.content);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setTitle(initialValues.title);
+    setContent(initialValues.content);
     setErrors({});
   };
   const validations = {
-    title: [{ type: "Required" }],
+    content: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -59,7 +59,7 @@ export default function PostCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          title,
+          content,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -89,7 +89,7 @@ export default function PostCreateForm(props) {
               modelFields[key] = null;
             }
           });
-          await DataStore.save(new Post(modelFields));
+          await DataStore.save(new Comment(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -102,32 +102,32 @@ export default function PostCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "PostCreateForm")}
+      {...getOverrideProps(overrides, "CommentCreateForm")}
       {...rest}
     >
       <TextField
-        label="Title"
+        label="Content"
         isRequired={true}
         isReadOnly={false}
-        value={title}
+        value={content}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              title: value,
+              content: value,
             };
             const result = onChange(modelFields);
-            value = result?.title ?? value;
+            value = result?.content ?? value;
           }
-          if (errors.title?.hasError) {
-            runValidationTasks("title", value);
+          if (errors.content?.hasError) {
+            runValidationTasks("content", value);
           }
-          setTitle(value);
+          setContent(value);
         }}
-        onBlur={() => runValidationTasks("title", title)}
-        errorMessage={errors.title?.errorMessage}
-        hasError={errors.title?.hasError}
-        {...getOverrideProps(overrides, "title")}
+        onBlur={() => runValidationTasks("content", content)}
+        errorMessage={errors.content?.errorMessage}
+        hasError={errors.content?.hasError}
+        {...getOverrideProps(overrides, "content")}
       ></TextField>
       <Flex
         justifyContent="space-between"
